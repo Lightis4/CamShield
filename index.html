@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a1020">
+    <title>CamShield | Segurança Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <a href="#" class="brand" data-page="dashboard">
+                <div class="brand-icon">C</div>
+                <div>
+                    <span class="brand-name">CamShield</span>
+                    <span class="brand-caption">SMART SECURITY</span>
+                </div>
+            </a>
+
+            <div class="menu-label">MENU PRINCIPAL</div>
+
+            <nav class="navigation">
+                <button class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">▦</span> Visão geral
+                </button>
+                <button class="nav-item" data-page="cameras">
+                    <span class="nav-icon">▣</span> Minhas câmeras
+                </button>
+                <button class="nav-item" data-page="alerts">
+                    <span class="nav-icon">♧</span> Alertas
+                    <span class="nav-count" id="sidebar-alert-count">2</span>
+                </button>
+                <button class="nav-item" data-page="activity">
+                    <span class="nav-icon">◷</span> Atividades
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="protection-card">
+                    <div class="protection-symbol">◆</div>
+                    <h3>Proteção inteligente</h3>
+                    <p>Acompanhe a segurança dos seus dispositivos em um só lugar.</p>
+                    <div class="protection-status">
+                        <span class="status-dot"></span>
+                        Monitoramento demonstrativo
+                    </div>
+                </div>
+
+                <div class="profile">
+                    <div class="avatar">CS</div>
+                    <div class="profile-info">
+                        <strong>Administrador</strong>
+                        <span>Conta demonstrativa</span>
+                    </div>
+                    <span class="profile-menu">•••</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="mobile-brand">
+                    <div class="brand-icon">C</div>
+                    <strong>CamShield</strong>
+                </div>
+
+                <div class="breadcrumb">
+                    <span>CamShield</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <strong id="breadcrumb-current">Visão geral</strong>
+                </div>
+
+                <div class="topbar-actions">
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        Sistema demonstrativo
+                    </div>
+                    <button class="icon-button" id="theme-button" title="Alternar aparência" aria-label="Alternar aparência">☼</button>
+                </div>
+            </header>
+
+            <section class="page-section active" id="page-dashboard">
+                <div class="welcome-row">
+                    <div>
+                        <div class="eyebrow">CENTRAL DE SEGURANÇA</div>
+                        <h1>Visão geral</h1>
+                        <p class="subtitle">Acompanhe o estado dos seus dispositivos de segurança.</p>
+                    </div>
+                    <button class="primary-button" id="add-camera-button">
+                        <span>＋</span> Adicionar câmera
+                    </button>
+                </div>
+
+                <div class="demo-notice">
+                    <span class="notice-icon">ⓘ</span>
+                    <span>Modo de demonstração: os dados e as análises desta interface são simulados.</span>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Câmeras cadastradas</span>
+                            <span class="stat-icon blue">▣</span>
+                        </div>
+                        <div class="stat-value" id="camera-total">3</div>
+                        <div class="stat-description">Dispositivos no painel</div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Segurança média</span>
+                            <span class="stat-icon green">◆</span>
+                        </div>
+                        <div class="stat-value"><span id="average-score">70</span><small>/100</small></div>
+                        <div class="stat-description">Pontuação estimada</div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Alertas pendentes</span>
+                            <span class="stat-icon orange">⚠</span>
+                        </div>
+                        <div class="stat-value" id="alert-total">2</div>
+                        <div class="stat-description">Precisam de atenção</div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Proteção estimada</span>
+                            <span class="stat-icon purple">⌁</span>
+                        </div>
+                        <div class="stat-value"><span id="protected-total">1</span><small> de <span id="protected-out-of">3</span></small></div>
+                        <div class="stat-description">Dispositivos com boa pontuação</div>
+                    </article>
+                </div>
+
+                <div class="content-grid">
+                    <section class="panel camera-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>Minhas câmeras</h2>
+                                <p>Visão geral dos dispositivos cadastrados</p>
+                            </div>
+                            <button class="text-button" data-page="cameras">Ver todas <span>→</span></button>
+                        </div>
+
+                        <div class="search-box">
+                            <span>⌕</span>
+                            <input type="search" id="camera-search" placeholder="Buscar câmera por nome ou local..." aria-label="Buscar câmeras">
+                        </div>
+
+                        <div class="camera-list" id="camera-list"></div>
+
+                        <div class="empty-state hidden" id="camera-empty">
+                            <span>⌕</span>
+                            <strong>Nenhuma câmera encontrada</strong>
+                            <p>Tente outro termo ou cadastre um dispositivo.</p>
+                        </div>
+                    </section>
+
+                    <section class="panel alerts-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>Alertas de segurança</h2>
+                                <p>Itens que merecem sua atenção</p>
+                            </div>
+                            <span class="small-counter" id="alert-header-count">2 ativos</span>
+                        </div>
+                        <div class="alert-list" id="alert-list"></div>
+                        <div class="empty-state hidden" id="alert-empty">
+                            <span>✓</span>
+                            <strong>Tudo em dia!</strong>
+                            <p>Não existem alertas pendentes.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="panel activity-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Atividades recentes</h2>
+                            <p>Últimas ações realizadas no painel</p>
+                        </div>
+                        <button class="text-button" data-page="activity">Ver histórico <span>→</span></button>
+                    </div>
+                    <div class="activity-list" id="recent-activity"></div>
+                </section>
+            </section>
+
+            <section class="page-section" id="page-cameras">
+                <div class="welcome-row">
+                    <div>
+                        <div class="eyebrow">DISPOSITIVOS</div>
+                        <h1>Minhas câmeras</h1>
+                        <p class="subtitle">Cadastre dispositivos e execute análises demonstrativas.</p>
+                    </div>
+                    <button class="primary-button" id="add-camera-button-2">＋ Adicionar câmera</button>
+                </div>
+                <section class="panel full-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Dispositivos cadastrados</h2>
+                            <p>Selecione uma câmera para simular uma análise.</p>
+                        </div>
+                    </div>
+                    <div class="camera-list all-cameras-list" id="all-camera-list"></div>
+                </section>
+            </section>
+
+            <section class="page-section" id="page-alerts">
+                <div class="welcome-row">
+                    <div>
+                        <div class="eyebrow">CENTRAL DE AVISOS</div>
+                        <h1>Alertas</h1>
+                        <p class="subtitle">Consulte e organize os alertas demonstrativos.</p>
+                    </div>
+                </div>
+                <section class="panel full-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Todos os alertas</h2>
+                            <p>Alertas simulados gerados para o protótipo.</p>
+                        </div>
+                    </div>
+                    <div class="alert-list" id="all-alert-list"></div>
+                    <div class="empty-state hidden" id="all-alert-empty">
+                        <span>✓</span>
+                        <strong>Nenhum alerta pendente</strong>
+                        <p>Todos os alertas foram resolvidos.</p>
+                    </div>
+                </section>
+            </section>
+
+            <section class="page-section" id="page-activity">
+                <div class="welcome-row">
+                    <div>
+                        <div class="eyebrow">REGISTROS DO SISTEMA</div>
+                        <h1>Histórico de atividades</h1>
+                        <p class="subtitle">Acompanhe as ações realizadas durante esta demonstração.</p>
+                    </div>
+                    <button class="secondary-button" id="clear-activity">Limpar histórico</button>
+                </div>
+                <section class="panel full-panel">
+                    <div class="activity-list" id="all-activity-list"></div>
+                    <div class="empty-state hidden" id="activity-empty">
+                        <span>◷</span>
+                        <strong>Nenhuma atividade registrada</strong>
+                        <p>As próximas ações aparecerão aqui.</p>
+                    </div>
+                </section>
+            </section>
+
+            <footer class="footer">
+                <span>CamShield © 2026</span>
+                <span>Protótipo educacional de segurança digital</span>
+            </footer>
+        </main>
+    </div>
+
+    <div class="modal-overlay hidden" id="camera-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">NOVO DISPOSITIVO</div>
+                    <h2 id="modal-title">Adicionar câmera</h2>
+                </div>
+                <button class="icon-button" id="close-modal" aria-label="Fechar janela">✕</button>
+            </div>
+
+            <p class="modal-description">Cadastre uma câmera de exemplo para acompanhar no painel.</p>
+
+            <form id="camera-form">
+                <label for="camera-name">Nome da câmera</label>
+                <input id="camera-name" name="name" type="text" placeholder="Ex.: Câmera da garagem" maxlength="60" required>
+
+                <label for="camera-location">Localização</label>
+                <input id="camera-location" name="location" type="text" placeholder="Ex.: Garagem" maxlength="60" required>
+
+                <label for="camera-model">Modelo ou identificação</label>
+                <input id="camera-model" name="model" type="text" placeholder="Ex.: Modelo residencial" maxlength="60" required>
+
+                <label for="camera-profile">Perfil demonstrativo de segurança</label>
+                <select id="camera-profile" name="profile" required>
+                    <option value="good">Boa — 94/100</option>
+                    <option value="medium" selected>Moderada — 72/100</option>
+                    <option value="risk">Atenção — 43/100</option>
+                </select>
+
+                <p class="form-hint">A pontuação é fictícia e serve apenas para demonstrar a interface.</p>
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-button" id="cancel-modal">Cancelar</button>
+                    <button type="submit" class="primary-button">Cadastrar câmera</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+</body>
+</html>
